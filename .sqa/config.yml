@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/hexatomic/hexatomic:
+      branch: main
+      repo: https://github.com/hexatomic/hexatomic
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/hexatomic/hexatomic git:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-saffron-cassowary.sh
+        container: qc.acc_thirsty-pear-chimpanzee
+  QC.Doc:
+    repos:
+      github.com/hexatomic/hexatomic find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-brass-civet.sh
+        container: qc.doc_craggy-cardinal-bonobo
+      github.com/hexatomic/hexatomic git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-heliotrope-whale.sh
+        container: qc.doc_cheeky-asparagus-koala
+      github.com/hexatomic/hexatomic markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-apricot-urchin.sh
+        container: qc.doc_zippy-green-pinscher
+  QC.Lic:
+    repos:
+      github.com/hexatomic/hexatomic licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-orchid-slug.sh
+        container: qc.lic_queasy-cyan-mist
+  QC.Met:
+    repos:
+      github.com/hexatomic/hexatomic cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-buff-serval.sh
+        container: qc.met_zippy-blue-mule
+  QC.Sty:
+    repos:
+      github.com/hexatomic/hexatomic checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-lime-bison.sh
+        container: qc.sty_wimpy-magenta-wildebeest
+      github.com/hexatomic/hexatomic jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-salmon-caterpillar.sh
+        container: qc.sty_cloudy-sapphire-badger
+  QC.Ver:
+    repos:
+      github.com/hexatomic/hexatomic get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-xanthic-mandrill.sh
+        container: qc.ver_stinky-cyan-bison
+timeout: 5400
